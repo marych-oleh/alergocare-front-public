@@ -1,0 +1,1 @@
+export { setZodConfig } from './config';

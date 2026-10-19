@@ -1,0 +1,92 @@
+// Route definitions (parts)
+export const ROUTES = {
+	LOGIN: 'login',
+	FORBIDDEN: '403',
+
+	// Modules
+	DASHBOARD_PREFIX: 'dashboard',
+
+	// Patients
+	PATIENTS_PREFIX: 'patients',
+	PATIENT_DETAILS: ':patientID',
+	PATIENT_CASES: 'cases',
+
+	// Cases
+	CASES_PREFIX: 'cases',
+	CASE_DETAILS: ':caseID',
+	CASE_CREATE: 'create',
+	CASE_PATIENT: 'patient',
+	// Case Testings
+	CASE_TESTINGS: 'testing',
+	CASE_TESTING_DETAILS: ':testingID',
+
+	// Statistics
+	STATISTICS_PREFIX: 'statistics',
+	STATISTICS_DRUG_PREFIX: 'drug',
+	STATISTICS_SYMPTOM_PREFIX: 'symptom',
+	STATISTICS_TESTING_PREFIX: 'testing',
+	STATISTICS_DEMOGRAPHICS_PREFIX: 'demographics',
+} as const;
+
+// Absolute paths (for links or redirect)
+export const PATHS = {
+	login: `/${ROUTES.LOGIN}`,
+	forbidden: `/${ROUTES.FORBIDDEN}`,
+
+	dashboard: {
+		root: `/${ROUTES.DASHBOARD_PREFIX}`,
+	},
+
+	patients: {
+		root: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}`,
+		byId: {
+			path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}/${ROUTES.PATIENT_DETAILS}`,
+			get: (patientID: string) =>
+				`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}/${patientID}`,
+		},
+		cases: {
+			path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}/${ROUTES.PATIENT_DETAILS}/${ROUTES.PATIENT_CASES}`,
+			get: (patientID: string) =>
+				`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}/${patientID}/${ROUTES.PATIENT_CASES}`,
+		},
+		caseCreate: {
+			path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}/${ROUTES.PATIENT_DETAILS}/${ROUTES.PATIENT_CASES}/${ROUTES.CASE_CREATE}`,
+			get: (patientID: string) =>
+				`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.PATIENTS_PREFIX}/${patientID}/${ROUTES.PATIENT_CASES}/${ROUTES.CASE_CREATE}`,
+		},
+	},
+
+	statistics: {
+		root: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.STATISTICS_PREFIX}`,
+		drug: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.STATISTICS_PREFIX}/${ROUTES.STATISTICS_DRUG_PREFIX}`,
+		symptom: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.STATISTICS_PREFIX}/${ROUTES.STATISTICS_SYMPTOM_PREFIX}`,
+		testing: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.STATISTICS_PREFIX}/${ROUTES.STATISTICS_TESTING_PREFIX}`,
+		demographics: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.STATISTICS_PREFIX}/${ROUTES.STATISTICS_DEMOGRAPHICS_PREFIX}`,
+	},
+
+	cases: {
+		root: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}`,
+		byId: {
+			path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${ROUTES.CASE_DETAILS}`,
+			get: (caseID: string) =>
+				`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${caseID}`,
+		},
+		patient: {
+			path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${ROUTES.CASE_DETAILS}/${ROUTES.CASE_PATIENT}`,
+			get: (patientID: string) =>
+				`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${patientID}/${ROUTES.CASE_PATIENT}`,
+		},
+		testing: {
+			path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${ROUTES.CASE_DETAILS}/${ROUTES.CASE_TESTINGS}`,
+			get: (caseID: string) =>
+				`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${caseID}/${ROUTES.CASE_TESTINGS}`,
+
+			byId: {
+				path: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${ROUTES.CASE_DETAILS}/${ROUTES.CASE_TESTINGS}/${ROUTES.CASE_TESTING_DETAILS}`,
+				get: (caseID: string, testingID: string) =>
+					`/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${caseID}/${ROUTES.CASE_TESTINGS}/${testingID}`,
+			},
+		},
+		createCase: `/${ROUTES.DASHBOARD_PREFIX}/${ROUTES.CASES_PREFIX}/${ROUTES.CASE_CREATE}`,
+	},
+} as const;

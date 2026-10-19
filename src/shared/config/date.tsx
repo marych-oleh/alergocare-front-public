@@ -1,0 +1,4 @@
+export const DATE_FORMATS = {
+	DISPLAY_FULL: 'DD.MM.YYYY HH:mm:ss',
+	DISPLAY_DATE: 'DD.MM.YYYY',
+};
